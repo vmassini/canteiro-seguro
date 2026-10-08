@@ -1,0 +1,4 @@
+includes/segredos.php
+_site/
+.DS_Store
+*.log

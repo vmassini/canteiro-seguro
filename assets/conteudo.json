@@ -1,0 +1,592 @@
+{
+  "_leia": "Conteudo do jogo da SIPAT. Pode revisar os textos a vontade. Em cada placa, 'certa' e o numero da alternativa correta (0, 1 ou 2); o jogo embaralha a ordem na tela. Se mudar um 'id' depois que o pessoal comecar a jogar, o relatorio de erros daquele item recomeca do zero.",
+  "mapa": {
+    "nome": "Canteiro de Obras",
+    "_legenda": ". chao | # obstaculo | v rua (so atravessa na faixa) | f faixa de pedestre | h altura (cinto) | r ruido (protetor auricular) | s solda (oculos) | q produtos quimicos (luvas) | g area isolada da grua | S inicio | E ponto de encontro",
+    "grade": [
+      "S..#..hhh",
+      ".#....hhh",
+      "...#...h.",
+      ".##..#...",
+      "vvvfvvvvv",
+      "..#......",
+      "rr..gg#..",
+      "rr#.gg..q",
+      "r....#.qq",
+      "..#.....q",
+      "vvvvvvfvv",
+      "..#.ss...",
+      ".#..ss.#.",
+      "...#.....",
+      "#.....#.E"
+    ],
+    "epis": [
+      {
+        "tipo": "cinto",
+        "x": 1,
+        "y": 2
+      },
+      {
+        "tipo": "abafador",
+        "x": 7,
+        "y": 5
+      },
+      {
+        "tipo": "luvas",
+        "x": 1,
+        "y": 9
+      },
+      {
+        "tipo": "oculos",
+        "x": 3,
+        "y": 12
+      }
+    ],
+    "placas": [
+      [
+        7,
+        0
+      ],
+      [
+        8,
+        2
+      ],
+      [
+        0,
+        7
+      ],
+      [
+        8,
+        8
+      ],
+      [
+        5,
+        11
+      ],
+      [
+        4,
+        5
+      ],
+      [
+        7,
+        13
+      ],
+      [
+        3,
+        8
+      ]
+    ],
+    "placas_seguranca": 5,
+    "placas_saude": 3
+  },
+  "epis": {
+    "cinto": {
+      "nome": "Cinto de segurança",
+      "emoji": "🦺",
+      "area": "altura",
+      "protege": "Protege contra quedas. Use sempre que trabalhar acima de 2 metros, preso num ponto de ancoragem firme ou na linha de vida."
+    },
+    "abafador": {
+      "nome": "Protetor auricular",
+      "emoji": "🎧",
+      "area": "ruído",
+      "protege": "Protege a sua audição do barulho de serra, martelete e betoneira. A perda de audição não volta mais."
+    },
+    "oculos": {
+      "nome": "Óculos de proteção",
+      "emoji": "🥽",
+      "area": "solda e corte",
+      "protege": "Protege os olhos de faíscas, poeira e lascas. Um cisco de metal pode machucar o olho para sempre."
+    },
+    "luvas": {
+      "nome": "Luvas",
+      "emoji": "🧤",
+      "area": "produtos químicos",
+      "protege": "Protegem as mãos de cimento, cal, solventes e cortes. Cimento molhado queima a pele."
+    }
+  },
+  "isolada": {
+    "titulo": "Área isolada: carga suspensa",
+    "texto": "Aqui a grua está levantando material. Nunca passe embaixo de carga suspensa, nem para cortar caminho. Dê a volta!"
+  },
+  "seguranca": [
+    {
+      "id": "fio-poca",
+      "icone": "fio",
+      "titulo": "Fio na água",
+      "cena": "Uma extensão com o fio descascado está dentro de uma poça d'água, ligada na betoneira.",
+      "opcoes": [
+        "Desligar a energia e chamar o eletricista",
+        "Enrolar bastante fita isolante no fio e continuar",
+        "Tirar o fio da água com a mão"
+      ],
+      "certa": 0,
+      "grave": true,
+      "porque": "Eletricidade com água mata. Desligue primeiro e deixe o conserto com o eletricista. Nunca encoste no fio."
+    },
+    {
+      "id": "andaime",
+      "icone": "andaime",
+      "titulo": "Andaime sem proteção",
+      "cena": "O andaime está alto, sem guarda-corpo e com uma tábua do piso solta.",
+      "opcoes": [
+        "Subir com cuidado, é rapidinho",
+        "Não subir e avisar o encarregado",
+        "Amarrar a tábua com arame e subir"
+      ],
+      "certa": 1,
+      "grave": true,
+      "porque": "Andaime sem guarda-corpo e com piso solto causa queda. Só se usa depois de arrumado e liberado."
+    },
+    {
+      "id": "buraco-laje",
+      "icone": "buraco",
+      "titulo": "Buraco na laje",
+      "cena": "Tem um buraco no piso da laje coberto só com um pedaço de papelão.",
+      "opcoes": [
+        "Colocar mais papelão por cima",
+        "Avisar só quem estiver perto",
+        "Fechar com tampa firme e sinalizar"
+      ],
+      "certa": 2,
+      "grave": true,
+      "porque": "Papelão esconde o buraco, mas não segura ninguém. Buraco no piso precisa de tampa resistente e sinalização."
+    },
+    {
+      "id": "escada-improvisada",
+      "icone": "escada",
+      "titulo": "Escada improvisada",
+      "cena": "Um colega subiu num balde em cima de caixotes para alcançar o teto.",
+      "opcoes": [
+        "Pedir que desça e pegar uma escada",
+        "Segurar firme o balde até ele terminar o serviço",
+        "Colocar mais um caixote embaixo"
+      ],
+      "certa": 0,
+      "grave": true,
+      "porque": "Improviso para subir é uma das maiores causas de queda. Use escada ou plataforma em bom estado."
+    },
+    {
+      "id": "extintor",
+      "icone": "extintor",
+      "titulo": "Extintor bloqueado",
+      "cena": "O extintor está atrás de vários sacos de cimento e ninguém consegue pegar.",
+      "opcoes": [
+        "Deixar assim, quase nunca é usado",
+        "Liberar a frente do extintor",
+        "Levar o extintor para o almoxarifado"
+      ],
+      "certa": 1,
+      "grave": false,
+      "porque": "No começo de um incêndio, cada segundo conta. O extintor precisa estar sempre à vista e com a frente livre."
+    },
+    {
+      "id": "pilha-blocos",
+      "icone": "material",
+      "titulo": "Pilha tombando",
+      "cena": "Uma pilha de blocos muito alta está inclinando para o lado da passagem.",
+      "opcoes": [
+        "Passar rápido pelo outro lado",
+        "Escorar a pilha com uma tábua comprida e seguir",
+        "Isolar a área e baixar a pilha"
+      ],
+      "certa": 2,
+      "grave": true,
+      "porque": "Material empilhado alto demais pode cair em cima de alguém. Isole e monte pilhas baixas e firmes."
+    },
+    {
+      "id": "vala",
+      "icone": "vala",
+      "titulo": "Vala sem escora",
+      "cena": "Um colega está dentro de uma vala funda, sem escoramento, com terra amontoada na beirada.",
+      "opcoes": [
+        "Pedir que saia até escorarem a vala",
+        "Descer na vala para ajudar e terminar mais rápido",
+        "Ficar olhando da beirada"
+      ],
+      "certa": 0,
+      "grave": true,
+      "porque": "Vala funda sem escora pode desmoronar em segundos e soterrar quem está dentro. Primeiro a escora, depois o serviço."
+    },
+    {
+      "id": "colega-sem-epi",
+      "icone": "pessoa",
+      "titulo": "Colega sem capacete",
+      "cena": "Um colega está carregando ferro sem capacete e de chinelo.",
+      "opcoes": [
+        "Não falar nada para não criar clima",
+        "Pedir com respeito que use o EPI",
+        "Tirar uma foto e mandar no grupo da obra"
+      ],
+      "certa": 1,
+      "grave": false,
+      "porque": "Cuidar do colega é parte da segurança. Um aviso respeitoso na hora pode evitar um acidente."
+    },
+    {
+      "id": "serra",
+      "icone": "serra",
+      "titulo": "Serra sem proteção",
+      "cena": "A serra de bancada está sem a capa de proteção do disco.",
+      "opcoes": [
+        "Usar só para cortes pequenos",
+        "Usar com óculos e luvas",
+        "Não usar e avisar o encarregado"
+      ],
+      "certa": 2,
+      "grave": true,
+      "porque": "Máquina sem proteção não se usa, nem para um corte rápido. Óculos e luvas não protegem a mão do disco."
+    },
+    {
+      "id": "galao",
+      "icone": "quimico",
+      "titulo": "Galão sem nome",
+      "cena": "Um galão sem rótulo, com cheiro forte, está perto do refeitório.",
+      "opcoes": [
+        "Não mexer e chamar o responsável",
+        "Abrir e cheirar de longe para descobrir o que é",
+        "Jogar o líquido no ralo"
+      ],
+      "certa": 0,
+      "grave": false,
+      "porque": "Produto químico sem rótulo é perigoso: não se sabe o que é nem como se proteger. Afaste e chame quem sabe."
+    },
+    {
+      "id": "carga",
+      "icone": "guindaste",
+      "titulo": "Gente embaixo da carga",
+      "cena": "A grua está levantando material e tem gente passando por baixo para cortar caminho.",
+      "opcoes": [
+        "Gritar cuidado bem alto e seguir trabalhando",
+        "Parar a grua e isolar a área",
+        "Passar correndo também"
+      ],
+      "certa": 1,
+      "grave": true,
+      "porque": "Ninguém pode ficar embaixo de carga suspensa. Se alguém entrar, o içamento para."
+    },
+    {
+      "id": "cinto-ancorado",
+      "icone": "cinto",
+      "titulo": "Cinto preso errado",
+      "cena": "Um trabalhador na beira da laje está com o cinto preso num ferro solto.",
+      "opcoes": [
+        "Está bom assim, o ferro é bem resistente",
+        "Tirar o cinto, que atrapalha",
+        "Prender na linha de vida"
+      ],
+      "certa": 2,
+      "grave": true,
+      "porque": "O cinto só protege se estiver preso num ponto firme, como a linha de vida. Ferro solto pode ceder na queda."
+    },
+    {
+      "id": "saida-emergencia",
+      "icone": "entulho",
+      "titulo": "Saída bloqueada",
+      "cena": "Tem entulho e madeira com pregos no caminho da saída de emergência.",
+      "opcoes": [
+        "Limpar o caminho e tirar os pregos",
+        "Deixar para a faxina geral de sexta-feira",
+        "Cobrir tudo com uma lona"
+      ],
+      "certa": 0,
+      "grave": false,
+      "porque": "A saída de emergência precisa estar livre sempre. Prego virado para cima também fura o pé."
+    },
+    {
+      "id": "betoneira-limpeza",
+      "icone": "betoneira",
+      "titulo": "Limpando a betoneira",
+      "cena": "Um colega quer limpar o tambor da betoneira com ela ainda ligada na tomada.",
+      "opcoes": [
+        "Desligar só no botão e limpar",
+        "Desligar e tirar da tomada antes",
+        "Limpar com ela girando bem devagar, com cuidado"
+      ],
+      "certa": 1,
+      "grave": true,
+      "porque": "Limpeza e manutenção só com a máquina desligada e fora da tomada, para ninguém ligar sem querer."
+    },
+    {
+      "id": "quase-acidente",
+      "icone": "relato",
+      "titulo": "Quase acidente",
+      "cena": "Um martelo caiu do terceiro andar e quase acertou alguém. Ninguém se machucou.",
+      "opcoes": [
+        "Esquecer, não aconteceu nada",
+        "Dar uma bronca e seguir",
+        "Avisar a segurança do trabalho"
+      ],
+      "certa": 2,
+      "grave": false,
+      "porque": "Quase acidente é um aviso. Contar para a segurança ajuda a corrigir a causa antes que alguém se machuque."
+    },
+    {
+      "id": "benjamim",
+      "icone": "benjamim",
+      "titulo": "Tomada esquentando",
+      "cena": "No contêiner, muitos aparelhos estão ligados num só benjamim, que está quente.",
+      "opcoes": [
+        "Desligar alguns e pedir outra tomada",
+        "Ligar mais um benjamim para dividir os aparelhos",
+        "Jogar água para esfriar"
+      ],
+      "certa": 0,
+      "grave": false,
+      "porque": "Benjamim quente é sobrecarga, e sobrecarga causa incêndio. Desligue alguns aparelhos e peça uma tomada adequada."
+    },
+    {
+      "id": "dds",
+      "icone": "dds",
+      "titulo": "Começar sem conversar",
+      "cena": "A equipe vai começar a concretar a laje sem o DDS (conversa de segurança do dia).",
+      "opcoes": [
+        "Começar e conversar depois",
+        "Fazer o DDS rapidinho antes",
+        "Pular o DDS, todos já sabem"
+      ],
+      "certa": 1,
+      "grave": false,
+      "porque": "O DDS leva poucos minutos e lembra os riscos do dia antes do serviço começar."
+    },
+    {
+      "id": "ferramenta-altura",
+      "icone": "andaime",
+      "titulo": "Ferramenta lá em cima",
+      "cena": "Um colega deixou o martelo solto na beirada do andaime.",
+      "opcoes": [
+        "Deixar, ele vai usar já já",
+        "Empurrar mais para o canto",
+        "Guardar ou amarrar a ferramenta"
+      ],
+      "certa": 2,
+      "grave": false,
+      "porque": "Ferramenta solta lá em cima pode cair na cabeça de quem passa embaixo. Guarde ou prenda."
+    },
+    {
+      "id": "faixa",
+      "icone": "pessoa",
+      "titulo": "Atravessar a rua da obra",
+      "cena": "Você precisa atravessar a via por onde passam caminhões e a betoneira.",
+      "opcoes": [
+        "Atravessar pela faixa, olhando",
+        "Atravessar correndo logo atrás do caminhão que passou",
+        "Atravessar mexendo no celular"
+      ],
+      "certa": 0,
+      "grave": true,
+      "porque": "Use sempre a faixa e olhe para os dois lados. O motorista de caminhão grande nem sempre vê quem está perto."
+    },
+    {
+      "id": "organizacao",
+      "icone": "entulho",
+      "titulo": "Bagunça no caminho",
+      "cena": "Restos de material e fios estão espalhados no meio da passagem.",
+      "opcoes": [
+        "Desviar com cuidado e deixar tudo como está",
+        "Organizar e deixar a passagem livre",
+        "Esperar o fim da obra"
+      ],
+      "certa": 1,
+      "grave": false,
+      "porque": "Canteiro organizado evita tropeços, cortes e quedas. Cada um cuida do seu espaço."
+    },
+    {
+      "id": "sinalizacao",
+      "icone": "material",
+      "titulo": "Placa no chão",
+      "cena": "A placa de 'área de risco' caiu e está virada no chão.",
+      "opcoes": [
+        "Deixar, todo mundo já sabe",
+        "Usar a placa como apoio",
+        "Colocar a placa de pé de novo"
+      ],
+      "certa": 2,
+      "grave": false,
+      "porque": "Placa só protege se puder ser vista. Pessoas novas e visitantes não conhecem os riscos do lugar."
+    },
+    {
+      "id": "epi-estragado",
+      "icone": "cinto",
+      "titulo": "EPI estragado",
+      "cena": "O seu capacete está rachado.",
+      "opcoes": [
+        "Pedir a troca no almoxarifado",
+        "Usar assim mesmo",
+        "Passar fita bem forte em volta da rachadura e usar"
+      ],
+      "certa": 0,
+      "grave": false,
+      "porque": "EPI danificado não protege. Peça a troca: é seu direito e é obrigação da empresa fornecer."
+    }
+  ],
+  "saude": [
+    {
+      "id": "agua",
+      "icone": "saude",
+      "titulo": "Calor forte",
+      "cena": "O sol está forte e um colega está tonto, suando muito.",
+      "opcoes": [
+        "Dar um café bem forte e mandar continuar o serviço",
+        "Levar para a sombra, dar água e avisar",
+        "Deixar descansando no sol"
+      ],
+      "certa": 1,
+      "grave": false,
+      "porque": "Tontura no calor é sinal de desidratação. Sombra, água e avisar o encarregado. Beba água ao longo do dia, mesmo sem sede."
+    },
+    {
+      "id": "protetor-solar",
+      "icone": "saude",
+      "titulo": "Sol o dia todo",
+      "cena": "Você vai trabalhar o dia inteiro no sol.",
+      "opcoes": [
+        "Não precisa de nada, já está acostumado",
+        "Usar protetor solar e manga comprida",
+        "Trabalhar sem camisa para refrescar"
+      ],
+      "certa": 1,
+      "grave": false,
+      "porque": "O sol do dia a dia pode causar câncer de pele com o tempo. Protetor solar, manga comprida e aba no capacete ajudam."
+    },
+    {
+      "id": "coluna",
+      "icone": "ergonomia",
+      "titulo": "Saco pesado",
+      "cena": "Você precisa levantar um saco de cimento de 50 kg.",
+      "opcoes": [
+        "Dobrar os joelhos e pedir ajuda",
+        "Levantar bem rápido, mesmo com as costas curvadas",
+        "Levar dois de uma vez"
+      ],
+      "certa": 0,
+      "grave": false,
+      "porque": "Levantar peso com a coluna curvada machuca as costas. Dobre os joelhos, mantenha a carga perto do corpo e peça ajuda."
+    },
+    {
+      "id": "alcool",
+      "icone": "saude",
+      "titulo": "Depois do churrasco",
+      "cena": "Um colega bebeu no almoço e quer voltar a operar a betoneira.",
+      "opcoes": [
+        "Deixar, foi só um pouco",
+        "Dar um café forte para ele",
+        "Não deixar e avisar o encarregado"
+      ],
+      "certa": 2,
+      "grave": true,
+      "porque": "Álcool diminui a atenção e os reflexos. Quem bebeu não pode trabalhar com máquina nem em altura."
+    },
+    {
+      "id": "sono",
+      "icone": "saude",
+      "titulo": "Noite mal dormida",
+      "cena": "Você dormiu muito pouco e está com sono no serviço.",
+      "opcoes": [
+        "Avisar o encarregado e evitar tarefa de risco",
+        "Tomar vários energéticos durante o dia para aguentar",
+        "Ir trabalhar em altura assim mesmo"
+      ],
+      "certa": 0,
+      "grave": false,
+      "porque": "Cansaço causa acidente. Avise o encarregado. Dormir bem é parte da segurança."
+    },
+    {
+      "id": "primeiros-socorros",
+      "icone": "saude",
+      "titulo": "Colega se machucou",
+      "cena": "Um colega caiu e está com muita dor na perna.",
+      "opcoes": [
+        "Levantar ele à força",
+        "Não mexer e chamar ajuda (192)",
+        "Dar um remédio qualquer"
+      ],
+      "certa": 1,
+      "grave": true,
+      "porque": "Não mexa em quem caiu: pode piorar a lesão. Chame os primeiros socorros da obra e o SAMU (192)."
+    },
+    {
+      "id": "alimentacao",
+      "icone": "saude",
+      "titulo": "Pular o almoço",
+      "cena": "O serviço está corrido e você pensa em pular o almoço.",
+      "opcoes": [
+        "Fazer a pausa e comer bem",
+        "Comer só salgadinho e refrigerante para ganhar tempo",
+        "Trabalhar direto e comer à noite"
+      ],
+      "certa": 0,
+      "grave": false,
+      "porque": "Sem comer, o corpo cansa e a atenção cai. Faça as pausas e prefira comida de verdade."
+    },
+    {
+      "id": "vacina",
+      "icone": "saude",
+      "titulo": "Corte com ferro",
+      "cena": "Você se cortou num ferro enferrujado.",
+      "opcoes": [
+        "Lavar e procurar o posto de saúde",
+        "Passar um pouco de terra no corte para parar o sangue",
+        "Ignorar, é só um corte"
+      ],
+      "certa": 0,
+      "grave": false,
+      "porque": "Lave bem, cubra o corte e procure atendimento. A vacina antitetânica precisa estar em dia."
+    },
+    {
+      "id": "saude-mental",
+      "icone": "saude",
+      "titulo": "Colega diferente",
+      "cena": "Um colega anda muito triste e calado há semanas.",
+      "opcoes": [
+        "Fazer piada para animar",
+        "Não é da minha conta",
+        "Conversar e indicar ajuda (CVV 188)"
+      ],
+      "certa": 2,
+      "grave": false,
+      "porque": "Saúde mental também é saúde. Ouvir sem julgar ajuda. O CVV atende de graça pelo 188, 24 horas."
+    },
+    {
+      "id": "ruido-saude",
+      "icone": "ergonomia",
+      "titulo": "Zumbido no ouvido",
+      "cena": "Depois do serviço com o martelete, você sente um zumbido no ouvido.",
+      "opcoes": [
+        "Normal, passa sozinho",
+        "Sempre usar o protetor auricular",
+        "Colocar algodão no ouvido"
+      ],
+      "certa": 1,
+      "grave": false,
+      "porque": "Zumbido é sinal de que o ouvido sofreu. A perda de audição pelo barulho não tem volta. Use o protetor certo."
+    },
+    {
+      "id": "remedio",
+      "icone": "saude",
+      "titulo": "Remédio que dá sono",
+      "cena": "Você tomou um remédio que deixa sonolento e hoje vai operar uma máquina.",
+      "opcoes": [
+        "Operar mesmo assim",
+        "Avisar o encarregado antes",
+        "Tomar café para cortar o sono"
+      ],
+      "certa": 1,
+      "grave": false,
+      "porque": "Alguns remédios deixam a pessoa lenta. Avise para fazer outra tarefa enquanto estiver tomando."
+    },
+    {
+      "id": "poeira",
+      "icone": "ergonomia",
+      "titulo": "Muita poeira",
+      "cena": "Você vai cortar blocos e a poeira está forte.",
+      "opcoes": [
+        "Molhar o corte e usar máscara",
+        "Prender a respiração a cada corte e seguir trabalhando",
+        "Cortar mais rápido"
+      ],
+      "certa": 0,
+      "grave": false,
+      "porque": "A poeira do corte faz mal ao pulmão com o tempo. Molhar o material e usar a máscara certa protegem."
+    }
+  ]
+}
