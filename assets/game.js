@@ -1170,7 +1170,8 @@ function responder(k, escolha) {
       <p>${esc(it.porque)}</p>
     </div>
     <div class="pilha"><button class="btn btn-amarelo" id="b-cont">Continuar</button></div>`;
-  $('#c-resposta').scrollIntoView({ behavior: 'smooth', block: 'end' });
+  // rola so a janela da placa (scrollIntoView rolava a pagina inteira no celular e cortava o topo)
+  conteudo.scrollTo({ top: conteudo.scrollHeight, behavior: 'smooth' });
   sumir(obj.placas, k, certo ? COR.ok : COR.perigo);
   if (certo) explosao(...k.split(',').map(Number), COR.amarelo, 10);
   atualizarHUD();

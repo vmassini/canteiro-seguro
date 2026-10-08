@@ -22,7 +22,7 @@ function v(string $rel): string { $t = @filemtime(__DIR__ . '/' . $rel); return 
     }
   </script>
 </head>
-<body>
+<body class="pagina-jogo">
   <div id="app">
     <header class="hud">
       <div class="hud-item" id="hud-capacetes" title="Capacetes (vidas)"></div>

@@ -19,6 +19,9 @@ button, select, input { font: inherit; }
 button { cursor: pointer; touch-action: manipulation; }
 
 #app { display: grid; grid-template-rows: auto 1fr auto; height: 100vh; height: 100dvh; }
+/* tela do jogo: nada rola nem "puxa" a pagina; o app ocupa exatamente a area visivel */
+body.pagina-jogo { overflow: hidden; overscroll-behavior: none; }
+body.pagina-jogo #app { position: fixed; inset: 0; height: auto; }
 
 /* ---------- HUD ---------- */
 .hud {
